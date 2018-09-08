@@ -1,1 +1,12 @@
-"# teamM"  git init git add README.md git commit -m "first commit" git remote add origin https://github.com/muitimon/teamM.git git push -u origin master
+# team
+## コンセプト
+- ライブを成功させるゲーム
+- サイリウムでアイドルを応援する
+- サイリウムでアンチを撃退する
+  - サイリウムを投げる
+### 機能拡張
+- アイドル側も置く
+- ボーナスタイムもつけたい
+
+## 実行環境
+- Oculus Go
