@@ -219,7 +219,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 60
-  EnemyPrefs: {fileID: 1853028977000614, guid: 1644e63ca1e5c418da2616a9f5cad48c, type: 2}
+  EnemyPrefs:
+  - {fileID: 1038179858434884, guid: 6abb84dab48604413a17f8609700520c, type: 2}
+  - {fileID: 1420396114926712, guid: c1910368e0fad47e1a94d0a1a0e8b9e3, type: 2}
+  - {fileID: 1280302159712298, guid: 7252a438cf7fe4bdcac8fb5e4512b152, type: 2}
+  - {fileID: 1783897052359406, guid: 242e0a96cf99d4feab2f688527d0cabb, type: 2}
+  - {fileID: 1393305484066554, guid: 25419189ad8fc4212a301acefa8300f3, type: 2}
+  - {fileID: 1832644574458696, guid: b6dac513784b243c79a1ede6c11d7710, type: 2}
 --- !u!1 &375396764
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +320,7 @@ GameObject:
   - component: {fileID: 1452048596}
   m_Layer: 0
   m_Name: Idol
-  m_TagString: Idol
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -379,7 +385,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1452048595}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalPosition: {x: -5.36, y: 0, z: -12.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

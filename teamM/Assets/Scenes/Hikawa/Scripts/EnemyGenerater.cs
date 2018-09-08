@@ -7,7 +7,7 @@ public class EnemyGenerater : MonoBehaviour {
 	private int count = 0;
 	public int speed = 60;
 
-	public GameObject EnemyPrefs;
+	public GameObject[] EnemyPrefs = new GameObject[6];
 
 	void Start () {
 
@@ -15,11 +15,12 @@ public class EnemyGenerater : MonoBehaviour {
 	
 	void Update () {
 		if(count >= speed){
-			//オブジェクトの座標
+			// オブジェクトの座標
 			float x = Random.Range(-10.0f, 10.0f);
 			float y = Random.Range(0.0f, 0.0f);
 			float z = Random.Range(0.0f, 0.0f);
-			GameObject Enemy = Instantiate(EnemyPrefs, new Vector3(x, y, z), Quaternion.identity);
+			int rand = Random.Range(0, 6);
+			GameObject Enemy = Instantiate(EnemyPrefs[rand], new Vector3(x, y, z), Quaternion.identity);
 			Enemy.transform.parent = transform;
 			count = 0;
 		}
