@@ -8,9 +8,8 @@ public class Enemy : MonoBehaviour {
 	[SerializeField] private float rotate = 30f;
 	private float rotateSpeed = 2f;
 
-	// 死んだ時のステータス
+	// 死亡フラグ
 	private bool death = false;
-	private int count = 0;
 
 	//[SerializeField] private float speed = 1f;
 	// Idolの前で止まる距離
@@ -30,32 +29,29 @@ public class Enemy : MonoBehaviour {
 		this.transform.Rotate(new Vector3(0, rotate, 0));
 
 		if(stopDistance <= Vector3.Distance(target.position, this.transform.position)){
-			// 前進する
-			animator.SetBool("Walk", true);
-			//transform.Translate(Vector3.forward * Time.deltaTime * speed * 1);
+			// Idolから遠い場合はIdolに向かう
+			animator.SetBool("Walk", true); // アニメーションで前進
+			animator.SetInteger("Idle", 0);
+			//transform.Translate(Vector3.forward * Time.deltaTime * speed * 1); // 座標移動で前進
 		}else{
-			animator.SetBool("Idle", true);
-		}
-		if(death){
-			if(count >= 240){
-				Destroy(this.gameObject);
-			}else{
-				count++;
-			}
+			// Idolにたどり着いたらIdle状態に変更
+			animator.SetInteger("Idle", Random.Range(1, 4));
+			animator.SetBool("Walk", false);
 		}
 	}
 
 	// tag "Pcylium"に触れたら死ぬ
 	void OnCollisionEnter(Collision other){
-		if(other.gameObject.tag == "Pcylium"){
-			Death();
+		if(!death && other.gameObject.tag == "Pcylium"){
+			StartCoroutine("Death");
 		}
 	}
 
-	void Death(){
-		animator.SetBool("Death", true);
+	private IEnumerator Death(){
 		death = true;
-	}
+		animator.SetBool("Death", true);
 
-	
+    	yield return new WaitForSeconds(5.0f);
+		Destroy(this.gameObject);
+	}
 }
