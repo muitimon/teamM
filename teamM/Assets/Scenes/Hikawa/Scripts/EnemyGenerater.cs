@@ -21,12 +21,13 @@ public class EnemyGenerater : MonoBehaviour {
 				nextGenerate = 1.0f;
 			}
 			// オブジェクトの座標
-			float x = Random.Range(-10.0f, 10.0f);
+			float x = Random.Range(-3.5f, 3.2f);
 			float y = Random.Range(0.0f, 0.0f);
 			float z = Random.Range(0.0f, 0.0f);
 			int rand = Random.Range(0, 6);
 			GameObject Enemy = Instantiate(EnemyPrefs[rand], new Vector3(x, y, z), Quaternion.identity);
 			Enemy.transform.parent = transform;
+			Enemy.transform.localScale = new Vector3(1, 1, 1);
 		}
 	}
 }
