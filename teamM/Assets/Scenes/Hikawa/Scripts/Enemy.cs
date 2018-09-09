@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour {
 
 	// tag "Pcylium"に触れたら死ぬ
 	void OnCollisionEnter(Collision other){
-		if(!death && other.gameObject.tag != "Pcylium"){
+		if(!death && other.gameObject.tag == "Pcylium"){
 			ScoreManager.GetComponent<ScoreManager>().addScore();
 			StartCoroutine("Death");
 		}
