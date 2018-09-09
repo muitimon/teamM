@@ -8,21 +8,6 @@ public class Pcylium : MonoBehaviour {
 	private GameObject model;
 
 	Vector3 origin = Vector3.zero;
-	int count = 0;
-
-	public bool State {
-		get {
-			return model.activeSelf;
-		}
-		set {
-			model.SetActive(value);
-		}
-	}
-
-
-	void OnEnable() {
-		count = 0;
-	}
 
 	// Use this for initialization
 	void Start () {
@@ -34,38 +19,44 @@ public class Pcylium : MonoBehaviour {
 	void Update () {
 		var controller = OVRInput.GetActiveController();
 		var pos = OVRInput.GetLocalControllerPosition (controller);
+		var trigger = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
 
-		// 手に持っているサイリウムをoculusコントローラの座標に追従
+		// 手に持っているサイリウムをoculusコントローラの座標・回転に追従
 		transform.position = origin + pos * 10;
+		transform.rotation= OVRInput.GetLocalControllerRotation(controller);
 
-		// 投げ検出
-		// サイリウムの投げ検出
-		if (count == 0 && OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger)) {
-			if(pos.y > -0.2f) {
-				count = 40;
-				System.Console.WriteLine ("Pcylium");
-				DebugOutput.Write ("Throw!");
+		if (trigger) {
+			// 投げ検出
+			// サイリウムの投げ検出
+			if (model.activeSelf) {
+				if(pos.y > -0.2f) {
+					System.Console.WriteLine ("Pcylium");
+					DebugOutput.Write ("Throw!");
 
-				/* 以下のようにしてコントローラの状態を参照する事ができます。
-				DebugOutput.Write(
-					"¥n" +
-					"Controller Stats" +
-					"  Position:" + OVRInput.GetLocalControllerPosition(controller).ToString() +
-					"  AngleVel:" + OVRInput.GetLocalControllerAngularVelocity(controller).ToString() + 
-					"  AngleAcc:" + OVRInput.GetLocalControllerAngularAcceleration(controller).ToString() +
-					"  Rotation:" + OVRInput.GetLocalControllerRotation(controller).ToString()
-				);
-				*/
+					/* 以下のようにしてコントローラの状態を参照する事ができます。
+					DebugOutput.Write(
+						"¥n" +
+						"Controller Stats" +
+						"  Position:" + OVRInput.GetLocalControllerPosition(controller).ToString() +
+						"  AngleVel:" + OVRInput.GetLocalControllerAngularVelocity(controller).ToString() + 
+						"  AngleAcc:" + OVRInput.GetLocalControllerAngularAcceleration(controller).ToString() +
+						"  Rotation:" + OVRInput.GetLocalControllerRotation(controller).ToString()
+					);
+					*/
 
-				//サイリウム生成
-				//var attackerPcyliumPrefab = Instantiate ();
-
-				//
+					//サイリウム生成
+					AttackerPcyliums.Attack(transform.position, transform.rotation);
+					model.SetActive (false);
+					StartCoroutine (ReloadMagazine (0.5f));
+				}
 			}
+		} else {
+			// 音楽に合わせてサイリウムを振っていることを検出
 		}
 	}
 
-	void FixedUpdate() {
-		count = Mathf.Max(0, count - 1);
+	IEnumerator ReloadMagazine(float sec) {
+		yield return new WaitForSeconds (sec);
+		model.SetActive (true);
 	}
 }

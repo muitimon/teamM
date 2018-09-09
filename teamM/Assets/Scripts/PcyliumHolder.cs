@@ -13,4 +13,8 @@ public class PcyliumHolder : MonoBehaviour {
 	void Update () {
 		
 	}
+
+	void MagazineReload(GameObject myHand) {
+		myHand.SendMessage ("EnablePcylium");
+	}
 }

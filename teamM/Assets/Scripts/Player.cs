@@ -11,7 +11,7 @@ public class Player : MonoBehaviour {
 	PcyliumHolder pcyliumHolder;
 
 	[SerializeField]
-	AttackerPcyliums attackerPcylium;
+	AttackerPcyliums attackerPcyliums;
 
 	// Use this for initialization
 	void Start () {
