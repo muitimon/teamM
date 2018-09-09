@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
 	private GameObject Idol;
+	private GameObject ScoreManager;
 	[SerializeField] private float rotate = 30f;
 	private float rotateSpeed = 2f;
 
@@ -20,6 +21,7 @@ public class Enemy : MonoBehaviour {
 	void Start () {
 		Idol = GameObject.Find("Idol");
 		animator = GetComponent<Animator>();
+		ScoreManager = GameObject.Find("ScoreManager");
 	}
 	
 	void Update () {
@@ -43,6 +45,7 @@ public class Enemy : MonoBehaviour {
 	// tag "Pcylium"に触れたら死ぬ
 	void OnCollisionEnter(Collision other){
 		if(!death && other.gameObject.tag == "Pcylium"){
+			ScoreManager.GetComponent<ScoreManager>().addScore();
 			StartCoroutine("Death");
 		}
 	}

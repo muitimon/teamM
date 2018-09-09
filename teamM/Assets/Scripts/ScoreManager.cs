@@ -21,6 +21,6 @@ public class ScoreManager : MonoBehaviour {
 	}
 
 	public void addScore(){
-		score += 5;
+		score += 1;
 	}
 }
