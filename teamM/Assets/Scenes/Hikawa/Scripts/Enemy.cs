@@ -14,12 +14,12 @@ public class Enemy : MonoBehaviour {
 
 	//[SerializeField] private float speed = 1f;
 	// Idolの前で止まる距離
-	[SerializeField] private float stopDistance = 5.0f;
+	[SerializeField] private float stopDistance = 100.0f;
 
 	private Animator animator;
 
 	void Start () {
-		Idol = GameObject.Find("Idol");
+		Idol = GameObject.FindGameObjectWithTag("Idol");
 		animator = GetComponent<Animator>();
 		ScoreManager = GameObject.Find("ScoreManager");
 	}
